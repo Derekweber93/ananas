@@ -68,12 +68,22 @@ async def on_ready():
 
 @bot.command()
 async def join(ctx):
-  if ctx.author.voice:
+    if not ctx.author.voice:
+        await ctx.send("You are not connected to a voice channel.")
+        return
     channel = ctx.author.voice.channel
-    await channel.connect()
-    await ctx.send(f'Joined {channel}')
-  else:
-    await ctx.send('You are not connected to a voice channel.')
+    try:
+        if ctx.voice_client:
+            await ctx.voice_client.disconnect()
+        await channel.connect(timeout=30)
+        await ctx.send(f"Connected to {channel.name}")
+    except asyncio.TimeoutError:
+        await ctx.send("Failed to connect to the voice channel (timeout).")
+    except discord.errors.ClientException as e:
+        await ctx.send(f"Already connected or connection error: {e}")
+    except Exception as e:
+        await ctx.send(f"Error connecting to voice channel: {e}")
+      
 @bot.command()
 async def play(ctx, url):
   if not ctx.voice_client:
