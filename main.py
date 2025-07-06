@@ -72,6 +72,7 @@ async def join(ctx):
         await ctx.send("You are not connected to a voice channel.")
         return
     channel = ctx.author.voice.channel
+    await channel.connect(self_deaf=True)
     try:
         if ctx.voice_client:
             await ctx.voice_client.disconnect()
