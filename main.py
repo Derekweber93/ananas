@@ -27,6 +27,12 @@ YDL_OPTIONS = {
 
 guild_queues = {}
 
+try:
+    result = subprocess.run(['ffmpeg', '-version'], capture_output=True, text=True)
+    print("FFmpeg Found:\n", result.stdout)
+except FileNotFoundError:
+    print("FFmpeg is not available!")
+
 class Song:
   def __init__(self, url, title, stream_url):
     self.url = url
@@ -66,13 +72,6 @@ async def join(ctx):
     channel = ctx.author.voice.channel
     await channel.connect()
     await ctx.send(f'Joined {channel}')
-
-    try:
-      result = subprocess.run(["ffmpeg", "-version"], capture_output=True, text=True)
-      print("FFmpeg found:\n", result.stdout)
-    except FileNotFoundError:
-      print("❌ FFmpeg not found in the container!")
-  
   else:
     await ctx.send('You are not connected to a voice channel.')
 @bot.command()
