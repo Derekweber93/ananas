@@ -95,6 +95,8 @@ async def play(ctx, url):
       stream_url = info['url']
       title = info['title']
 
+  sleep(5000)
+  
   song = Song(url, title, stream_url)
 
   guild_id = ctx.guild.id
