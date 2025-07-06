@@ -1,3 +1,6 @@
+# Netscape HTTP Cookie File
+# https://curl.se/docs/http-cookies.html
+
 .youtube.com	TRUE	/	FALSE	1786323737	HSID	AVSZzGcfhLEjDdSpr
 .youtube.com	TRUE	/	TRUE	1786323737	SSID	AE5pjSH1OhSMgOjCZ
 .youtube.com	TRUE	/	FALSE	1786323737	APISID	mfPbTNAGI8XGIVtB/AHuzWGwShUbLpaoby
