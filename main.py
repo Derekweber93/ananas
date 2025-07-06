@@ -5,6 +5,7 @@ import yt_dlp
 import asyncio
 import os
 import subprocess
+import time
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -95,7 +96,7 @@ async def play(ctx, url):
       stream_url = info['url']
       title = info['title']
 
-  sleep(5000)
+  time.sleep(5)
   
   song = Song(url, title, stream_url)
 
