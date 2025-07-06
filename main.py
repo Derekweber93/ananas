@@ -66,15 +66,15 @@ async def join(ctx):
     channel = ctx.author.voice.channel
     await channel.connect()
     await ctx.send(f'Joined {channel}')
-  else:
-    await ctx.send('You are not connected to a voice channel.')
-  # Debug: Check if ffmpeg is available in the container
-  try:
+
+    try:
       result = subprocess.run(["ffmpeg", "-version"], capture_output=True, text=True)
       print("FFmpeg found:\n", result.stdout)
-  except FileNotFoundError:
+    except FileNotFoundError:
       print("❌ FFmpeg not found in the container!")
-
+  
+  else:
+    await ctx.send('You are not connected to a voice channel.')
 @bot.command()
 async def play(ctx, url):
   if not ctx.voice_client:
