@@ -6,13 +6,6 @@ import asyncio
 import os
 import subprocess
 
-# Debug: Check if ffmpeg is available in the container
-try:
-    result = subprocess.run(["ffmpeg", "-version"], capture_output=True, text=True)
-    print("FFmpeg found:\n", result.stdout)
-except FileNotFoundError:
-    print("❌ FFmpeg not found in the container!")
-
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
@@ -75,6 +68,12 @@ async def join(ctx):
     await ctx.send(f'Joined {channel}')
   else:
     await ctx.send('You are not connected to a voice channel.')
+  # Debug: Check if ffmpeg is available in the container
+  try:
+      result = subprocess.run(["ffmpeg", "-version"], capture_output=True, text=True)
+      print("FFmpeg found:\n", result.stdout)
+  except FileNotFoundError:
+      print("❌ FFmpeg not found in the container!")
 
 @bot.command()
 async def play(ctx, url):
